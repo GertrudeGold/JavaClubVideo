@@ -2,6 +2,9 @@ package Pojo;
 
 import java.time.LocalDate;
 
+import DAO.UserDAO;
+
+
 public abstract class User {
 private String firstName;
 private String lastName;
@@ -81,5 +84,8 @@ public User(String firstName, String lastName, int rank, int gender, String adre
 	this.id = id;
 }
 
-
+public static  User login(String email, String password) {
+	
+	return UserDAO.login(email,password);
+}
 }
