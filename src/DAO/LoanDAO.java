@@ -2,19 +2,21 @@ package DAO;
 
 import java.sql.Connection;
 
-public class LoanDAO extends DAO<LoanDAO> {
+import Pojo.Loan;
+
+public class LoanDAO extends DAO<Loan> {
 	public LoanDAO(Connection conn) {
 		super(conn);		
 	}
 
 	@Override
-	public boolean create(LoanDAO obj) {
+	public boolean create(Loan obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(LoanDAO obj) {
+	public boolean delete(Loan obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -26,19 +28,19 @@ public class LoanDAO extends DAO<LoanDAO> {
 	}
 
 	@Override
-	public boolean update(LoanDAO obj) {
+	public boolean update(Loan obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public LoanDAO find(int id) {
+	public Loan find(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public LoanDAO findAll() {
+	public Loan findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,20 +1,20 @@
 package DAO;
 
 import java.sql.Connection;
-
-public class UserDAO extends DAO<UserDAO> {
+import Pojo.User;
+public class UserDAO extends DAO<User> {
 	public UserDAO(Connection conn) {
 		super(conn);		
 	}
 
 	@Override
-	public boolean create(UserDAO obj) {
+	public boolean create(User obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(UserDAO obj) {
+	public boolean delete(User obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -26,19 +26,19 @@ public class UserDAO extends DAO<UserDAO> {
 	}
 
 	@Override
-	public boolean update(UserDAO obj) {
+	public boolean update(User obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public UserDAO find(int id) {
+	public User find(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public UserDAO findAll() {
+	public User findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

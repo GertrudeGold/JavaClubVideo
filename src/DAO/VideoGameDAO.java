@@ -2,19 +2,21 @@ package DAO;
 
 import java.sql.Connection;
 
-public class VideoGameDAO extends DAO<VideoGameDAO> {
+import Pojo.VideoGame;
+
+public class VideoGameDAO extends DAO<VideoGame> {
 	public VideoGameDAO(Connection conn) {
 		super(conn);		
 	}
 
 	@Override
-	public boolean create(VideoGameDAO obj) {
+	public boolean create(VideoGame obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(VideoGameDAO obj) {
+	public boolean delete(VideoGame obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -26,19 +28,19 @@ public class VideoGameDAO extends DAO<VideoGameDAO> {
 	}
 
 	@Override
-	public boolean update(VideoGameDAO obj) {
+	public boolean update(VideoGame obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public VideoGameDAO find(int id) {
+	public VideoGame find(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public VideoGameDAO findAll() {
+	public VideoGame findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

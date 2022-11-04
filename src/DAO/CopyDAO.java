@@ -2,21 +2,23 @@ package DAO;
 
 import java.sql.Connection;
 
+import Pojo.Copy;
 
 
-public class CopyDAO extends DAO<CopyDAO> {
+
+public class CopyDAO extends DAO<Copy> {
 	public CopyDAO(Connection conn) {
 		super(conn);		
 	}
 
 	@Override
-	public boolean create(CopyDAO obj) {
+	public boolean create(Copy obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(CopyDAO obj) {
+	public boolean delete(Copy obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -28,19 +30,19 @@ public class CopyDAO extends DAO<CopyDAO> {
 	}
 
 	@Override
-	public boolean update(CopyDAO obj) {
+	public boolean update(Copy obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public CopyDAO find(int id) {
+	public Copy find(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public CopyDAO findAll() {
+	public Copy findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
