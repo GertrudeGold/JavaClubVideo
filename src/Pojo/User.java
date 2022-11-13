@@ -7,7 +7,6 @@ import DAO.DAOFactory;
 import DAO.UserDAO;
 
 
-
 public abstract class User {
 private String firstName;
 private String lastName;
@@ -82,22 +81,7 @@ public void setId(int id) {
 public void setDateRegister(LocalDate dateRegister) {
 	this.dateRegister = dateRegister;
 }
-
-public User(String firstName, String lastName, int rank, String adresse, int credit, LocalDate anniversary,
-		LocalDate dateRegister, String email, String password) {
-	super();
-	this.firstName = firstName;
-	this.lastName = lastName;
-	this.rank = rank;
-	this.adresse = adresse;
-	this.credit = credit;
-	
-	this.anniversary = anniversary;
-	this.dateRegister = dateRegister;
-	this.email = email;
-	this.password = password;
-}
-public User(String firstName, String lastName, int rank, String adresse, int credit, LocalDate anniversary,
+public User(String firstName, String lastName, int rank,String adresse, int credit, LocalDate anniversary,
 		LocalDate dateRegister, int id ) {
 	super();
 	this.firstName = firstName;
@@ -108,6 +92,20 @@ public User(String firstName, String lastName, int rank, String adresse, int cre
 	this.anniversary = anniversary;
 	this.dateRegister = dateRegister;
 	this.id = id;
+}
+public User(String firstName, String lastName, int rank, String adresse, int credit, LocalDate anniversary,
+		LocalDate dateRegister, String email, String password) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.rank = rank;
+	this.adresse = adresse;
+	this.credit = credit;
+
+	this.anniversary = anniversary;
+	this.dateRegister = dateRegister;
+	this.email = email;
+	this.password = password;
 }
 
 public static  User login(String email, String password) {

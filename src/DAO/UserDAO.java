@@ -2,6 +2,7 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -17,8 +18,39 @@ public class UserDAO extends DAO<User> {
 
 	@Override
 	public boolean create(User obj) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		boolean	success = false;
+			String query="INSERT INTO User (FirstName,LastName,Anniversary,Rank,Adresse,Credits,DateRegistration,Email,Password) VALUES(?,?,?,?,?,?,?,?,?)";
+			try {
+				PreparedStatement pstmt = (PreparedStatement) this.connect.prepareStatement(query);
+
+
+		        pstmt.setString(1,obj.getFirstName());
+		        pstmt.setString(2, obj.getLastName());
+		        pstmt.setObject(3,obj.getAnniversary());
+		        pstmt.setInt(4,obj.getRank());
+		        pstmt.setString(5,obj.getAdresse());
+		        pstmt.setInt(6,obj.getCredit());
+		        pstmt.setObject(7,obj.getDateRegister());
+		        pstmt.setString(8,obj.getEmail());
+		        pstmt.setString(9,obj.getPassword());
+
+
+
+		        pstmt.executeUpdate();
+		        pstmt.close();
+
+
+				success = true;
+
+
+
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+
+			return success;
 	}
 
 	@Override
@@ -73,10 +105,10 @@ public class UserDAO extends DAO<User> {
 				int rank = result.getInt("Rank");
 				int gender = result.getInt("Gender");
 				if(rank == 0) {
-					return user = new Player (name,firstName,rank,gender,adresse,credit,anniversary,dateRegistration,null, null, null, id);
+					return user = new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration,null, null, null, id);
 				}
 				if(rank == 1 ) {
-					return user = new Administrator(name,firstName,rank,gender,adresse,credit,anniversary,dateRegistration,id);
+					return user = new Administrator(name,firstName,rank,adresse,credit,anniversary,dateRegistration,id);
 				}
 				
 			}
