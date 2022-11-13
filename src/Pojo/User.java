@@ -109,8 +109,9 @@ public User(String firstName, String lastName, int rank, String adresse, int cre
 }
 
 public static  User login(String email, String password) {
-	
-	return UserDAO.login(email,password);
+	DAOFactory adf = new DAOFactory();
+	DAO<User> userDao = adf.getUserDAO();
+	return ((UserDAO) userDao).login(email,password);
 }
 public boolean Register(User user) {
 	DAOFactory adf = new DAOFactory();

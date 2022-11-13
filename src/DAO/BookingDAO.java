@@ -1,7 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
-
+import java.util.ArrayList;
 
 import Pojo.Booking;
 
@@ -39,7 +39,7 @@ public class BookingDAO extends DAO<Booking> {
 	}
 
 	@Override
-	public Booking findAll() {
+	public ArrayList<Booking> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import Pojo.Loan;
 
@@ -40,7 +41,7 @@ public class LoanDAO extends DAO<Loan> {
 	}
 
 	@Override
-	public Loan findAll() {
+	public ArrayList<Loan> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

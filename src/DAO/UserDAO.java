@@ -78,13 +78,13 @@ public class UserDAO extends DAO<User> {
 	}
 
 	@Override
-	public User findAll() {
+	public ArrayList<User> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	
-	public static User login(String email, String password) {
+	public User login(String email, String password) {
 
 		User user = null;
 		
@@ -103,7 +103,6 @@ public class UserDAO extends DAO<User> {
 				LocalDate anniversary = result.getDate("Anniversary").toLocalDate();
 				LocalDate dateRegistration = result.getDate("DateRegistration").toLocalDate();
 				int rank = result.getInt("Rank");
-				int gender = result.getInt("Gender");
 				if(rank == 0) {
 					return user = new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration,null, null, null, id);
 				}

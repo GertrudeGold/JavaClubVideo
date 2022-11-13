@@ -1,6 +1,7 @@
 package DAO;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import Pojo.Copy;
 
@@ -42,7 +43,7 @@ public class CopyDAO extends DAO<Copy> {
 	}
 
 	@Override
-	public Copy findAll() {
+	public ArrayList<Copy> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

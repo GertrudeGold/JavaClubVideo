@@ -1,6 +1,11 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 
 import Pojo.VideoGame;
 
@@ -29,8 +34,20 @@ public class VideoGameDAO extends DAO<VideoGame> {
 
 	@Override
 	public boolean update(VideoGame obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean success=false;
+		String query="Update VideoGame SET CreditPrice="+obj.getCreditPrice()+" WHERE Vid="+obj.getId();
+		try {
+			
+			PreparedStatement pstmt = (PreparedStatement) this.connect.prepareStatement(query);
+	        
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	        success=true;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		return success;
 	}
 
 	@Override
@@ -40,8 +57,31 @@ public class VideoGameDAO extends DAO<VideoGame> {
 	}
 
 	@Override
-	public VideoGame findAll() {
-		// TODO Auto-generated method stub
+	public ArrayList<VideoGame> findAll() {
+		ArrayList<VideoGame>videoGames = new ArrayList<VideoGame>();
+		
+		Connection conn=ProjetConnection.getInstance();
+		String query="select * from VideoGame ";
+		try {
+			ResultSet result=conn.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+			while(result.next()) {
+				
+				String gameName =result.getString("GameName");
+				int creditPrice=result.getInt("CreditPrice");
+				int id  = result.getInt("Vid");
+				videoGames.add(new VideoGame(creditPrice,gameName,id));
+				
+			}
+				
+			return videoGames;
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+	
 		return null;
 	}
 

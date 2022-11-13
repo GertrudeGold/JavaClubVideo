@@ -1,6 +1,9 @@
 package DAO;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+
+import Pojo.Loan;
 
 public abstract class DAO<T> {
 	protected Connection connect = null;
@@ -19,5 +22,5 @@ public abstract class DAO<T> {
 	
 	public abstract T find(int id);
 	
-	public abstract T findAll();
+	public abstract ArrayList<T> findAll();
 }

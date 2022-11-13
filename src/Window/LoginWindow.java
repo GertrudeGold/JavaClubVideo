@@ -137,9 +137,9 @@ public class LoginWindow {
 		frame.getContentPane().add(newAccountButton);
 		newAccountButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					RegisterWindow RegisterWindow = new RegisterWindow();
-					JFrame RegisterFrame =  RegisterWindow.getFrame();
-					RegisterFrame.setVisible(true);
+					RegisterWindow registerWindow = new RegisterWindow();
+					JFrame registerFrame =  registerWindow.getFrame();
+					registerFrame.setVisible(true);
 					frame.dispose();
 
 				}

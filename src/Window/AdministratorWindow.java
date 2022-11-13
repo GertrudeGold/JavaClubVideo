@@ -1,10 +1,14 @@
 package Window;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
 import Pojo.Administrator;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 
 public class AdministratorWindow {
@@ -49,6 +53,22 @@ public class AdministratorWindow {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-	}
+		
+		JButton GoToEditCreditButton = new JButton("Edit credit ");
+		GoToEditCreditButton.setBounds(10, 79, 89, 23);
+		frame.getContentPane().add(GoToEditCreditButton);
+		GoToEditCreditButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					EditCreditWindow editCreditWindow = new EditCreditWindow();
+					JFrame editCreditFrame =  editCreditWindow.getFrame();
+					editCreditFrame.setVisible(true);
+					frame.dispose();
 
+				}
+				});
+		
+		JLabel lblNewLabel = new JLabel("Hello administrator, Good to see you ! ");
+		lblNewLabel.setBounds(10, 32, 304, 14);
+		frame.getContentPane().add(lblNewLabel);
+	}
 }
