@@ -35,10 +35,6 @@ public class LoginWindow {
 	private JLabel Error;
 	private JPasswordField password;
 	private User User;
-	private JButton newAccountButton;
-	public JFrame getFrame() {
-		return frame;
-	}
 	
 	/**
 	 * Launch the application.
@@ -71,7 +67,7 @@ public class LoginWindow {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		JButton ConnectionButton = new JButton("Connection");
+		JButton ConnectionButton = new JButton("Se connecter");
 		ConnectionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
 				String pwd = new String (password.getPassword());
@@ -120,7 +116,7 @@ public class LoginWindow {
 		emailabel.setBounds(34, 55, 57, 14);
 		frame.getContentPane().add(emailabel);
 		
-		JLabel lblNewLabel = new JLabel("Password :");
+		JLabel lblNewLabel = new JLabel("mot de passe :");
 		lblNewLabel.setBounds(34, 89, 71, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
@@ -132,19 +128,6 @@ public class LoginWindow {
 		lblNewLabel.setLabelFor(password);
 		password.setBounds(134, 83, 199, 20);
 		frame.getContentPane().add(password);
-		
-		newAccountButton = new JButton("New account");
-		newAccountButton.setBounds(152, 226, 115, 23);
-		frame.getContentPane().add(newAccountButton);
-		newAccountButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					RegisterWindow RegisterWindow = new RegisterWindow();
-					JFrame RegisterFrame =  RegisterWindow.getFrame();
-					RegisterFrame.setVisible(true);
-					frame.dispose();
-					
-				}
-				});
 		
 	}
 	private User login(String email, String password) {
