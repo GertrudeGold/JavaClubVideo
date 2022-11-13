@@ -8,10 +8,17 @@ public class Player extends User{
 	private ArrayList<Booking> booking;
 	private ArrayList<Loan> loan;
 
-	public Player(String firstName, String lastName, int rank, int gender, String adresse, int credit,
+	public Player(String firstName, String lastName, int rank, String adresse, int credit,
+			LocalDate anniversary, LocalDate dateRegister, String email, String password) {
+		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, email, password);
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Player(String firstName, String lastName, int rank, String adresse, int credit,
 			LocalDate anniversary, LocalDate dateRegister,ArrayList<Copy> copy,ArrayList<Booking> booking,
 			ArrayList<Loan> loan, int id) {
-		super(firstName, lastName, rank, gender, adresse, credit, anniversary, dateRegister,id);
+		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister,id);
 		// TODO Auto-generated constructor stub
 	}
 	

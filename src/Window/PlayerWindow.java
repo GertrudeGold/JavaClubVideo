@@ -6,11 +6,16 @@ import javax.swing.JFrame;
 
 import Pojo.Administrator;
 import Pojo.Player;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.JButton;
 
 public class PlayerWindow {
 
 	private JFrame frame;
 	private Player connectPerson;
+	
 	public JFrame getFrame() {
 		return frame;
 	}
@@ -49,6 +54,8 @@ public class PlayerWindow {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		
 	}
-
 }
