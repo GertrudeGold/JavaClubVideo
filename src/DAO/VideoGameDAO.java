@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+import Pojo.Console;
 import Pojo.VideoGame;
 
 public class VideoGameDAO extends DAO<VideoGame> {
@@ -67,11 +67,24 @@ public class VideoGameDAO extends DAO<VideoGame> {
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery(query);
 			while(result.next()) {
-				
+				ArrayList<Console> consoles= new ArrayList<Console>();
 				String gameName =result.getString("GameName");
 				int creditPrice=result.getInt("CreditPrice");
 				int id  = result.getInt("Vid");
-				videoGames.add(new VideoGame(creditPrice,gameName,id));
+				String query2="select Console.Cid, Console.NameConsole from (Console INNER JOIN ConsolesOfVideoGame on Console.Cid = ConsolesOfVideoGame.idConsole)"
+						+ "WHERE ConsolesOfVideoGame.idVideoGame="+id;
+				ResultSet result2=conn.createStatement(
+						ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY).executeQuery(query2);
+				while(result2.next()) {
+					
+					int cid = result2.getInt("Cid");
+					String cName = result2.getString("NameConsole");
+					Console console = new Console(cName,cid);
+					consoles.add(console);
+				}
+				
+				videoGames.add(new VideoGame(creditPrice,gameName,consoles,id));
 				
 			}
 				

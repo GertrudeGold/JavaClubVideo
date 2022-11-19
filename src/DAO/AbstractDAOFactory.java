@@ -1,5 +1,6 @@
 package DAO;
 import Pojo.Booking;
+import Pojo.Console;
 import Pojo.Copy;
 import Pojo.User;
 import Pojo.Loan;
@@ -19,7 +20,7 @@ public abstract class AbstractDAOFactory {
 	public abstract DAO<Loan> getLoanDAO();
 	public abstract DAO<Booking> getBookingDAO();
 	public abstract DAO<VideoGame> getVideoGameDAO();
-	
+	public abstract DAO<Console> getConsoleDAO();
 	public static DAOFactory getFactory(int type){
 		switch(type){
 		case DAO_FACTORY:

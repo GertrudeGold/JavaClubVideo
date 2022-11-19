@@ -1,11 +1,28 @@
 package Pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Console {
+import DAO.ConsoleDAO;
+import DAO.DAO;
+import DAO.DAOFactory;
+import DAO.VideoGameDAO;
+
+public class Console implements Serializable {
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5637886907182228802L;
 private String nameConsole;
 private ArrayList<VideoGame> games;
 private int id;
+
+public int getId() {
+	return id;
+}
+public void setId(int id) {
+	this.id = id;
+}
 public String getNameConsole() {
 	return nameConsole;
 }
@@ -32,7 +49,16 @@ public Console(String nameConsole, int id) {
 	this.nameConsole = nameConsole;
 	this.id = id;
 }
+public static  ArrayList<Console> findAll() {
+	DAOFactory adf = new DAOFactory();
+	DAO<Console> consoleDao = adf.getConsoleDAO();
+	return ((ConsoleDAO) consoleDao).findAll();
+}
 
+@Override
+public String toString() {
+	return this.nameConsole ;
+}
 
 
 

@@ -1,18 +1,25 @@
 package Pojo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Player extends User{
-	private ArrayList<Copy> copy;
-	private ArrayList<Booking> booking;
-	private ArrayList<Loan> loan;
+public class Player extends User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5129593058312925108L;
+	private ArrayList<Copy> copys;
+	private ArrayList<Booking> bookings;
+	private ArrayList<Loan> loans;
 
 	public Player(String firstName, String lastName, int rank, String adresse, int credit,
-			LocalDate anniversary, LocalDate dateRegister,ArrayList<Copy> copy,ArrayList<Booking> booking,
-			ArrayList<Loan> loan, int id) {
+			LocalDate anniversary, LocalDate dateRegister,ArrayList<Copy> copys,ArrayList<Booking> bookings,
+			ArrayList<Loan> loans, int id) {
 		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister,id);
-		// TODO Auto-generated constructor stub
+	this.copys = copys;
+	this.bookings = bookings;
+	this.loans = loans;
 	}
 	public Player(String firstName, String lastName, int rank, String adresse, int credit,
 			LocalDate anniversary, LocalDate dateRegister, String email, String password) {
@@ -21,27 +28,27 @@ public class Player extends User{
 	}
 
 	public ArrayList<Copy> getCopy() {
-		return copy;
+		return copys;
 	}
 
-	public void setCopy(ArrayList<Copy> copy) {
-		this.copy = copy;
+	public void setCopy(ArrayList<Copy> copys) {
+		this.copys = copys;
 	}
 
 	public ArrayList<Booking> getBooking() {
-		return booking;
+		return bookings;
 	}
 
-	public void setBooking(ArrayList<Booking> booking) {
-		this.booking = booking;
+	public void setBooking(ArrayList<Booking> bookings) {
+		this.bookings = bookings;
 	}
 
 	public ArrayList<Loan> getLoan() {
-		return loan;
+		return loans;
 	}
 
-	public void setLoan(ArrayList<Loan> loan) {
-		this.loan = loan;
+	public void setLoan(ArrayList<Loan> loans) {
+		this.loans = loans;
 	}
 	
 	

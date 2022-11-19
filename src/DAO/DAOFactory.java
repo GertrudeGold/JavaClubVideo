@@ -3,6 +3,7 @@ package DAO;
 import java.sql.Connection;
 
 import Pojo.Booking;
+import Pojo.Console;
 import Pojo.Copy;
 import Pojo.Loan;
 import Pojo.User;
@@ -32,6 +33,10 @@ protected static final Connection conn = ProjetConnection.getInstance();
 	@Override
 	public DAO<Copy> getCopyDAO(){
 		return new CopyDAO(conn);
+	}
+	@Override
+	public DAO<Console> getConsoleDAO(){
+		return new ConsoleDAO(conn);
 	}
 	
 }

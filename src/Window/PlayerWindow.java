@@ -1,11 +1,15 @@
 package Window;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
 import Pojo.Administrator;
 import Pojo.Player;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 
 public class PlayerWindow {
 
@@ -49,6 +53,23 @@ public class PlayerWindow {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Hello player : "+connectPerson.getFirstName());
+		lblNewLabel.setBounds(10, 11, 121, 14);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JButton addCopyButton = new JButton("Add a copy");
+		addCopyButton.setBounds(10, 51, 89, 23);
+		frame.getContentPane().add(addCopyButton);
+		addCopyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					AddCopyWindow addCopyWindow = new AddCopyWindow(connectPerson);
+					JFrame addCopyframe =  addCopyWindow.getFrame();
+					addCopyframe.setVisible(true);
+					frame.dispose();
 
+				}
+				});
+	}
 }

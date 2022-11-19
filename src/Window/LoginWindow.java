@@ -97,9 +97,9 @@ public class LoginWindow {
 						
 					}
 					if(ConnectPerson instanceof Player) {
-						PlayerWindow treasurerWindow = new PlayerWindow((Player) ConnectPerson);
-						JFrame treasurerFrame =  treasurerWindow.getFrame();
-						treasurerFrame.setVisible(true);
+						PlayerWindow playerWindow = new PlayerWindow((Player) ConnectPerson);
+						JFrame playerFrame =  playerWindow.getFrame();
+						playerFrame.setVisible(true);
 						frame.dispose();
 						
 					}

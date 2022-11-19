@@ -9,6 +9,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Pojo.Administrator;
+import Pojo.Booking;
+import Pojo.Copy;
+import Pojo.Loan;
 import Pojo.Player;
 import Pojo.User;
 public class UserDAO extends DAO<User> {
@@ -104,7 +107,10 @@ public class UserDAO extends DAO<User> {
 				LocalDate dateRegistration = result.getDate("DateRegistration").toLocalDate();
 				int rank = result.getInt("Rank");
 				if(rank == 0) {
-					return user = new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration,null, null, null, id);
+					ArrayList<Copy> copys = new ArrayList<Copy>();
+					ArrayList<Booking> bookings = new ArrayList<Booking>();
+					ArrayList<Loan> loans = new ArrayList<Loan>();
+					return user = new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration,copys, bookings, loans, id);
 				}
 				if(rank == 1 ) {
 					return user = new Administrator(name,firstName,rank,adresse,credit,anniversary,dateRegistration,id);

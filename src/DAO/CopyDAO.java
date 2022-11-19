@@ -1,6 +1,8 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Pojo.Copy;
@@ -14,8 +16,34 @@ public class CopyDAO extends DAO<Copy> {
 
 	@Override
 	public boolean create(Copy obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean	success = false;
+		String query="INSERT INTO Copy (idUser,IdVideoGame,IdConsole,Available) VALUES(?,?,?,?)";
+		try {
+			PreparedStatement pstmt = (PreparedStatement) this.connect.prepareStatement(query);
+
+
+	        pstmt.setInt(1,obj.getPlayer().getId());
+	        pstmt.setInt(2, obj.getVideoGame().getId());
+	        pstmt.setInt(3,obj.getConsole().getId());
+	        pstmt.setInt(4,0);
+	        
+
+
+
+	        pstmt.executeUpdate();
+	        pstmt.close();
+
+
+			success = true;
+
+
+
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+
+		return success;
 	}
 
 	@Override
