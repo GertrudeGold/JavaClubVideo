@@ -1,6 +1,7 @@
 package Pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import DAO.DAO;
 import DAO.DAOFactory;
@@ -51,6 +52,7 @@ public class Copy implements Serializable {
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -68,10 +70,24 @@ public class Copy implements Serializable {
 		this.videoGame = videoGame;
 		this.console = console;
 	}
+	
+	public Copy(Player player, VideoGame videoGame, Console console, int id) {
+		super();
+		this.player = player;
+		this.videoGame = videoGame;
+		this.console = console;
+		this.id = id;
+	}
 	public boolean Create(Copy copy) {
 		DAOFactory adf = new DAOFactory();
 		DAO<Copy> copyDao = adf.getCopyDAO();
 		return copyDao.create(copy);
+		
+	}
+	public static ArrayList<Copy> findall() {
+		DAOFactory adf = new DAOFactory();
+		DAO<Copy> copyDao = adf.getCopyDAO();
+		return copyDao.findAll();
 		
 	}
 

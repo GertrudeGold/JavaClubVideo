@@ -51,17 +51,30 @@ public class PlayerWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 747, 439);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Hello player : "+connectPerson.getFirstName());
-		lblNewLabel.setBounds(10, 11, 121, 14);
+		lblNewLabel.setBounds(10, 11, 243, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JButton addCopyButton = new JButton("Add a copy");
-		addCopyButton.setBounds(10, 51, 89, 23);
+		addCopyButton.setBounds(10, 51, 141, 23);
 		frame.getContentPane().add(addCopyButton);
+		
+		JButton Reservebutton = new JButton("Reserve a game");
+		Reservebutton.setBounds(10, 85, 141, 23);
+		frame.getContentPane().add(Reservebutton);
+		Reservebutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				WatchListCopyWindow watchListCopyWindow = new WatchListCopyWindow(connectPerson);
+				JFrame watchListCopyFrame =  watchListCopyWindow.getFrame();
+				watchListCopyFrame.setVisible(true);
+				frame.dispose();
+
+				}
+				});
 		addCopyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					AddCopyWindow addCopyWindow = new AddCopyWindow(connectPerson);

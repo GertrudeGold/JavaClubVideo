@@ -2,10 +2,15 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import Pojo.Console;
 import Pojo.Copy;
+import Pojo.Player;
+import Pojo.VideoGame;
 
 
 
@@ -72,7 +77,54 @@ public class CopyDAO extends DAO<Copy> {
 
 	@Override
 	public ArrayList<Copy> findAll() {
-		// TODO Auto-generated method stub
+		ArrayList<Copy>copys = new ArrayList<Copy>();
+		
+		Connection conn=ProjetConnection.getInstance();
+		String query="select * from (("
+				+ "(Copy INNER JOIN VideoGame on Copy.IdVideoGame = VideoGame.Vid)"
+				+ "INNER JOIN Console on Console.Cid = Copy.IdConsole)"
+				+ "Inner JOIN User on User.Uid = Copy.IdUser)"
+				+ "where Copy.IsLock="+0;
+		try {
+			ResultSet result=conn.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+			while(result.next()) {
+				
+				//for videoGame
+				String gameName =result.getString("GameName");
+				int creditPrice=result.getInt("CreditPrice");
+				int idVideoGame = result.getInt("Vid");
+				//for player
+				String name=result.getString("LastName");
+				String firstName=result.getString("FirstName");
+				String adresse=result.getString("Adresse");
+				int idPlayer = result.getInt("Uid");
+				int credit=result.getInt("Credits");
+				LocalDate anniversary = result.getDate("Anniversary").toLocalDate();
+				LocalDate dateRegistration = result.getDate("DateRegistration").toLocalDate();
+				int rank = result.getInt("Rank");
+				// for console
+				String NameConsole =result.getString("NameConsole");
+				int idConsole  = result.getInt("Cid");
+				//for copy
+				int idCopy  = result.getInt("Uvid");
+				Player player = new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration,idPlayer);
+				Console console = new Console(NameConsole,idConsole);
+				VideoGame videoGame =new VideoGame(creditPrice,gameName,idVideoGame);
+				
+				
+				copys.add(new Copy(player,videoGame,console,idCopy));
+				
+			}
+				
+			return copys;
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+	
 		return null;
 	}
 

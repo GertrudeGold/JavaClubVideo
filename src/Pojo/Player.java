@@ -13,6 +13,11 @@ public class Player extends User implements Serializable{
 	private ArrayList<Booking> bookings;
 	private ArrayList<Loan> loans;
 
+	public Player(String firstName, String lastName, int rank, String adresse, int credit, LocalDate anniversary,
+			LocalDate dateRegister, int id) {
+		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, id);
+		// TODO Auto-generated constructor stub
+	}
 	public Player(String firstName, String lastName, int rank, String adresse, int credit,
 			LocalDate anniversary, LocalDate dateRegister,ArrayList<Copy> copys,ArrayList<Booking> bookings,
 			ArrayList<Loan> loans, int id) {
