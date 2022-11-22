@@ -3,13 +3,16 @@ package Window;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.JFrame;
 
 import Pojo.Copy;
+import Pojo.Loan;
 import Pojo.Player;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 
 public class LoanWindow {
 
@@ -99,6 +102,10 @@ public class LoanWindow {
 		JLabel lblNewLabel_4 = new JLabel("Number of week : ");
 		lblNewLabel_4.setBounds(10, 118, 95, 14);
 		frame.getContentPane().add(lblNewLabel_4);
+		
+		JSpinner numberOfWeek = new JSpinner();
+		numberOfWeek.setBounds(111, 115, 30, 20);
+		frame.getContentPane().add(numberOfWeek);
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
@@ -108,5 +115,26 @@ public class LoanWindow {
 					frame.dispose();
 				}
 				});
+			validateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if((int)numberOfWeek.getValue() > 0 ) {
+					if(connectPerson.getCredit() >= (copyChoose.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue()))
+					{
+					int credit = connectPerson.getCredit();
+					credit-= copyChoose.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue();
+					connectPerson.setCredit(credit);
+					connectPerson.Update(connectPerson);
+					LocalDate now = LocalDate.now();  
+					LocalDate end = now.plusWeeks((int)numberOfWeek.getValue());
+					Loan loan = new Loan(now,end,1,connectPerson,copyChoose);
+					loan.Create(loan);
+					PlayerWindow playerWindow = new PlayerWindow(connectPerson);
+					JFrame playerFrame =  playerWindow.getFrame();
+					playerFrame.setVisible(true);
+					frame.dispose();
+					}
+					}
+				}
+			});
 	}
 }

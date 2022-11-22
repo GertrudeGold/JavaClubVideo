@@ -12,7 +12,7 @@ public class Administrator extends User implements Serializable{
 
 	public Administrator(String firstName, String lastName, int rank, String adresse, int credit,
 			LocalDate anniversary, LocalDate dateRegister, int id) {
-		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, id);
+		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, id, dateRegister);
 		// TODO Auto-generated constructor stub
 	}
 

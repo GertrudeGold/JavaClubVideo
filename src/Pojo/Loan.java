@@ -3,6 +3,9 @@ package Pojo;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import DAO.DAO;
+import DAO.DAOFactory;
+
 public class Loan implements Serializable{
 
 	/**
@@ -54,6 +57,20 @@ public class Loan implements Serializable{
 		this.player = player;
 		this.copy = copy;
 		this.id = id;
+	}
+	public Loan(LocalDate dateStartLoan, LocalDate dateEndLoan, int onGoing, Player player, Copy copy) {
+		super();
+		this.dateStartLoan = dateStartLoan;
+		this.dateEndLoan = dateEndLoan;
+		this.onGoing = onGoing;
+		this.player = player;
+		this.copy = copy;
+	}
+	public boolean Create(Loan loan) {
+		DAOFactory adf = new DAOFactory();
+		DAO<Loan> loanDAO = adf.getLoanDAO();
+		return loanDAO.create(loan);
+		
 	}
 	
 

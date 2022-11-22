@@ -23,11 +23,11 @@ public class UserDAO extends DAO<User> {
 	public boolean create(User obj) {
 		
 		boolean	success = false;
-			String query="INSERT INTO User (FirstName,LastName,Anniversary,Rank,Adresse,Credits,DateRegistration,Email,Password) VALUES(?,?,?,?,?,?,?,?,?)";
+			String query="INSERT INTO User (FirstName,LastName,Anniversary,Rank,Adresse,Credits,DateRegistration,Email,Password,LastGainForAnniversary) VALUES(?,?,?,?,?,?,?,?,?,?)";
 			try {
 				PreparedStatement pstmt = (PreparedStatement) this.connect.prepareStatement(query);
 
-
+				
 		        pstmt.setString(1,obj.getFirstName());
 		        pstmt.setString(2, obj.getLastName());
 		        pstmt.setObject(3,obj.getAnniversary());
@@ -37,7 +37,7 @@ public class UserDAO extends DAO<User> {
 		        pstmt.setObject(7,obj.getDateRegister());
 		        pstmt.setString(8,obj.getEmail());
 		        pstmt.setString(9,obj.getPassword());
-
+		        pstmt.setObject(10,obj.getLastGainForAnniversary());
 
 
 		        pstmt.executeUpdate();
@@ -70,8 +70,21 @@ public class UserDAO extends DAO<User> {
 
 	@Override
 	public boolean update(User obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean success=false;
+		
+		String query="UPDATE User SET Credits="+obj.getCredit()+",LastGainForAnniversary=(#"+ obj.getLastGainForAnniversary()+"#) WHERE Uid="+obj.getId();
+		try {
+			PreparedStatement pstmt = (PreparedStatement) this.connect.prepareStatement(query);
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	        success=true;
+	        
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return success; 
 	}
 
 	@Override
@@ -106,11 +119,12 @@ public class UserDAO extends DAO<User> {
 				LocalDate anniversary = result.getDate("Anniversary").toLocalDate();
 				LocalDate dateRegistration = result.getDate("DateRegistration").toLocalDate();
 				int rank = result.getInt("Rank");
+				LocalDate LastGainForAnniversary = result.getDate("LastGainForAnniversary").toLocalDate();
 				if(rank == 0) {
 					ArrayList<Copy> copys = new ArrayList<Copy>();
 					ArrayList<Booking> bookings = new ArrayList<Booking>();
 					ArrayList<Loan> loans = new ArrayList<Loan>();
-					return user = new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration,copys, bookings, loans, id);
+					return user = new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration,copys, bookings, loans, id,LastGainForAnniversary);
 				}
 				if(rank == 1 ) {
 					return user = new Administrator(name,firstName,rank,adresse,credit,anniversary,dateRegistration,id);

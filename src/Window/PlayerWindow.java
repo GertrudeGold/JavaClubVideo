@@ -3,6 +3,7 @@ package Window;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.JFrame;
 
@@ -54,7 +55,16 @@ public class PlayerWindow {
 		frame.setBounds(100, 100, 747, 439);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+		//for anniversary
+		LocalDate now = LocalDate.now();  
+		if(connectPerson.getAnniversary().getDayOfMonth() == now.getDayOfMonth() && connectPerson.getAnniversary().getMonth() == now.getMonth())
+		{
+		    if(connectPerson.getLastGainForAnniversary().getYear() != now.getYear()){
+			connectPerson.setCredit(connectPerson.getCredit()+2);
+			connectPerson.setLastGainForAnniversary(now);
+			connectPerson.Update(connectPerson);
+			}
+		}
 		JLabel lblNewLabel = new JLabel("Hello player : "+connectPerson.getFirstName());
 		lblNewLabel.setBounds(10, 11, 243, 14);
 		frame.getContentPane().add(lblNewLabel);

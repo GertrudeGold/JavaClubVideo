@@ -182,7 +182,8 @@ public class RegisterWindow {
 				    LocalDate now = LocalDate.now();  
 				    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 					LocalDate date1 = LocalDate.parse(birthdayDate.getText(),formatter);
-					User user = new Player(firstname.getText(),name.getText(),0,adresse.getText(),10,date1,now,email.getText(),passWord.getText());
+					LocalDate defaultDateGain = LocalDate.of(1999,12,31);
+					User user = new Player(firstname.getText(),name.getText(),0,adresse.getText(),10,date1,now,email.getText(),passWord.getText(),defaultDateGain);
 					user.Register(user);
 					LoginWindow loginWindow = new LoginWindow();
 					JFrame LoginFrame =  loginWindow.getFrame();

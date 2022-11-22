@@ -18,6 +18,7 @@ private LocalDate anniversary;
 private LocalDate dateRegister;
 private String email;
 private String password;
+private LocalDate lastGainForAnniversary;
 
 public String getEmail() {
 	return email;
@@ -72,6 +73,12 @@ public LocalDate getDateRegister() {
 	return dateRegister;
 }
 
+public LocalDate getLastGainForAnniversary() {
+	return lastGainForAnniversary;
+}
+public void setLastGainForAnniversary(LocalDate lastGainForAnniversary) {
+	this.lastGainForAnniversary = lastGainForAnniversary;
+}
 public int getId() {
 	return id;
 }
@@ -82,7 +89,7 @@ public void setDateRegister(LocalDate dateRegister) {
 	this.dateRegister = dateRegister;
 }
 public User(String firstName, String lastName, int rank,String adresse, int credit, LocalDate anniversary,
-		LocalDate dateRegister, int id ) {
+		LocalDate dateRegister, int id ,LocalDate lastGainForAnniversary) {
 	super();
 	this.firstName = firstName;
 	this.lastName = lastName;
@@ -92,16 +99,17 @@ public User(String firstName, String lastName, int rank,String adresse, int cred
 	this.anniversary = anniversary;
 	this.dateRegister = dateRegister;
 	this.id = id;
+	this.lastGainForAnniversary = lastGainForAnniversary;
 }
 public User(String firstName, String lastName, int rank, String adresse, int credit, LocalDate anniversary,
-		LocalDate dateRegister, String email, String password) {
+		LocalDate dateRegister, String email, String password,LocalDate lastGainForAnniversary) {
 	super();
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.rank = rank;
 	this.adresse = adresse;
 	this.credit = credit;
-
+	this.lastGainForAnniversary = lastGainForAnniversary;
 	this.anniversary = anniversary;
 	this.dateRegister = dateRegister;
 	this.email = email;
@@ -117,5 +125,10 @@ public boolean Register(User user) {
 	DAOFactory adf = new DAOFactory();
 	DAO<User> userDao = adf.getUserDAO();
 	return userDao.create(user);
+}
+public boolean Update(User user) {
+	DAOFactory adf = new DAOFactory();
+	DAO<User> userDao = adf.getUserDAO();
+	return userDao.update(user);
 }
 }

@@ -12,23 +12,25 @@ public class Player extends User implements Serializable{
 	private ArrayList<Copy> copys;
 	private ArrayList<Booking> bookings;
 	private ArrayList<Loan> loans;
+	
 
 	public Player(String firstName, String lastName, int rank, String adresse, int credit, LocalDate anniversary,
 			LocalDate dateRegister, int id) {
-		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, id);
+		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, id, dateRegister);
 		// TODO Auto-generated constructor stub
 	}
 	public Player(String firstName, String lastName, int rank, String adresse, int credit,
 			LocalDate anniversary, LocalDate dateRegister,ArrayList<Copy> copys,ArrayList<Booking> bookings,
-			ArrayList<Loan> loans, int id) {
-		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister,id);
+			ArrayList<Loan> loans, int id,LocalDate lastGainForAnniversary) {
+		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister,id, lastGainForAnniversary);
 	this.copys = copys;
 	this.bookings = bookings;
 	this.loans = loans;
+	
 	}
 	public Player(String firstName, String lastName, int rank, String adresse, int credit,
-			LocalDate anniversary, LocalDate dateRegister, String email, String password) {
-		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, email, password);
+			LocalDate anniversary, LocalDate dateRegister, String email, String password, LocalDate lastGainForAnniversary) {
+		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, email, password, lastGainForAnniversary);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -55,6 +57,7 @@ public class Player extends User implements Serializable{
 	public void setLoan(ArrayList<Loan> loans) {
 		this.loans = loans;
 	}
+	
 	
 	
 

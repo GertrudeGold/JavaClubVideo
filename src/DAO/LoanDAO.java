@@ -1,6 +1,8 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Pojo.Loan;
@@ -12,8 +14,35 @@ public class LoanDAO extends DAO<Loan> {
 
 	@Override
 	public boolean create(Loan obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean	success = false;
+		String query="INSERT INTO Location (DateStartReservation,DateEndReservation,Ongoing,IdUser,IdCopy) VALUES(?,?,?,?,?)";
+		try {
+			PreparedStatement pstmt = (PreparedStatement) this.connect.prepareStatement(query);
+
+
+	        pstmt.setObject(1,obj.getDateStartLoan());
+	        pstmt.setObject(2, obj.getDateEndLoan());
+	        pstmt.setInt(3,obj.getOnGoing());
+	        pstmt.setInt(4,obj.getPlayer().getId());
+	        pstmt.setInt(5,obj.getCopy().getId());
+	        
+
+
+
+	        pstmt.executeUpdate();
+	        pstmt.close();
+
+
+			success = true;
+
+
+
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+
+		return success;
 	}
 
 	@Override
