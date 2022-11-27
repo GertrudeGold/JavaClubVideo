@@ -2,6 +2,7 @@ package Pojo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import DAO.DAO;
 import DAO.DAOFactory;
@@ -19,6 +20,12 @@ public class Loan implements Serializable{
 	private Copy copy;
 	private int id;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public LocalDate getDateStartLoan() {
 		return dateStartLoan;
 	}
@@ -58,6 +65,10 @@ public class Loan implements Serializable{
 		this.copy = copy;
 		this.id = id;
 	}
+	
+	public Loan() {
+		super();
+	}
 	public Loan(LocalDate dateStartLoan, LocalDate dateEndLoan, int onGoing, Player player, Copy copy) {
 		super();
 		this.dateStartLoan = dateStartLoan;
@@ -66,10 +77,28 @@ public class Loan implements Serializable{
 		this.player = player;
 		this.copy = copy;
 	}
+	
 	public boolean Create(Loan loan) {
 		DAOFactory adf = new DAOFactory();
 		DAO<Loan> loanDAO = adf.getLoanDAO();
 		return loanDAO.create(loan);
+		
+	}
+	public Loan find(int id) {
+		DAOFactory adf = new DAOFactory();
+		DAO<Loan> loanDAO = adf.getLoanDAO();
+		return loanDAO.find(id);
+		
+	}
+	public void endLoan() {
+		
+		this.setOnGoing(0);
+		this.copy.setIsLock(0);
+		copy.update(this.copy);
+		
+		DAOFactory adf = new DAOFactory();
+		DAO<Loan> loanDAO = adf.getLoanDAO();
+		loanDAO.update(this);
 		
 	}
 	

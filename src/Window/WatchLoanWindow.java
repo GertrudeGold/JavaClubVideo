@@ -16,16 +16,17 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import Pojo.Copy;
+import Pojo.Loan;
 import Pojo.Player;
 
 import javax.swing.JTextArea;
 
-public class WatchListCopyWindow {
+public class WatchLoanWindow {
 
 	private JFrame frame;
 	private Player connectPerson;
 	private JTable table;
-	private Copy copySelected;
+	private Loan loanSelected;
 	public JFrame getFrame() {
 		return frame;
 	}
@@ -36,7 +37,7 @@ public class WatchListCopyWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WatchListCopyWindow window = new WatchListCopyWindow();
+					WatchLoanWindow window = new WatchLoanWindow();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,10 +49,10 @@ public class WatchListCopyWindow {
 	/**
 	 * Create the application.
 	 */
-	public WatchListCopyWindow() {
+	public WatchLoanWindow() {
 		initialize();
 	}
-	public WatchListCopyWindow(Player connectPerson) {
+	public WatchLoanWindow(Player connectPerson) {
 		this.connectPerson = connectPerson;
 		initialize();
 	}
@@ -76,25 +77,26 @@ public class WatchListCopyWindow {
 		JTextArea txtrIfYourGame = new JTextArea();
 		txtrIfYourGame.setEditable(false);
 		txtrIfYourGame.setLineWrap(true);
-		txtrIfYourGame.setText("If your game is not on the list, pls make a reservation");
+		txtrIfYourGame.setText("dont give back a game at time cost 5/day credit");
 		txtrIfYourGame.setBounds(548, 381, 168, 74);
 		frame.getContentPane().add(txtrIfYourGame);
+		ArrayList<Loan> LoanToShow = connectPerson.getOnGoingLoan();
 		
-		ArrayList<Copy> copyToShow = Copy.findall();
-		String[] colums={"Game","Owner","Credit","Console","Id"};
-		Object data[][]=new Object[copyToShow.size()+1][5];
+		
+		String[] colums={"DateStart","DateEnd","Owner","Game","Id"};
+		Object data[][]=new Object[LoanToShow.size()+1][5];
 		data[0][0]=colums[0];
 		data[0][1]=colums[1];
 		data[0][2]=colums[2];
 		data[0][3]=colums[3];
 		data[0][4]=colums[4];
 		int cpt=1;
-		for (Copy copy : copyToShow) {
-			data[cpt][0]=copy.getVideoGame().getGameName();
-			data[cpt][1]=copy.getPlayer().getFirstName();
-			data[cpt][2]=copy.getVideoGame().getCreditPrice();
-			data[cpt][3]=copy.getConsole().getNameConsole();
-			data[cpt][4]=copy.getId();
+		for (Loan loan : LoanToShow) {
+			data[cpt][0]=loan.getDateStartLoan();
+			data[cpt][1]=loan.getDateEndLoan();
+			data[cpt][2]=loan.getPlayer().getFirstName();
+			data[cpt][3]=loan.getCopy().getVideoGame().getGameName();
+			data[cpt][4]=loan.getId();
 			cpt++;
 		}
 		table = new JTable();
@@ -122,33 +124,30 @@ public class WatchListCopyWindow {
 		table.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
+				
 				try {
-				if (e.getClickCount() == 1) {
-				
-					for(Copy copy : copyToShow) {
-				
-						if(copy.getId() == (int)table.getModel().getValueAt(table.rowAtPoint(e.getPoint()),4))
-						{
-							copySelected = copy;
+					if (e.getClickCount() == 1) {
+						for(Loan loan : LoanToShow) {
+						
+							if(loan.getId() == (int)table.getModel().getValueAt(table.rowAtPoint(e.getPoint()),4))
+							{
+								loanSelected = loan;
+							}
+						
+						}
+					
+					GiveBackCopyWindow giveBackCopyWindow = new GiveBackCopyWindow(connectPerson,loanSelected);
+					JFrame giveBackCopyFrame =  giveBackCopyWindow.getFrame();
+					giveBackCopyFrame.setVisible(true);
+					frame.dispose();
+					
 						}
 					}
-					
-					
-					LoanWindow loanWindow = new LoanWindow(connectPerson,copySelected);
-					JFrame loanFrame =  loanWindow.getFrame();
-					loanFrame.setVisible(true);
-					frame.dispose();
-					}
-					
-				}
-				
 				catch (Exception e1){
 					e1.getMessage();
 				}
-				
-			}
 		
-	});
+			}});
 			
 	}
 }

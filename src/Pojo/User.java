@@ -115,6 +115,15 @@ public User(String firstName, String lastName, int rank, String adresse, int cre
 	this.email = email;
 	this.password = password;
 }
+public User() {
+	super();
+}
+public void calculateBalance(int ammount) {
+	int currentCredit = this.getCredit();
+	int diff = currentCredit-ammount;
+	this.setCredit(diff);
+	this.Update(this);
+}
 
 public static  User login(String email, String password) {
 	DAOFactory adf = new DAOFactory();
@@ -130,5 +139,10 @@ public boolean Update(User user) {
 	DAOFactory adf = new DAOFactory();
 	DAO<User> userDao = adf.getUserDAO();
 	return userDao.update(user);
+}
+public User find(int id) {
+	DAOFactory adf = new DAOFactory();
+	DAO<User> userDao = adf.getUserDAO();
+	return userDao.find(id);
 }
 }

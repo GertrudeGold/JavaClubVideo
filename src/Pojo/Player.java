@@ -28,6 +28,13 @@ public class Player extends User implements Serializable{
 	this.loans = loans;
 	
 	}
+	public Player() {
+		super();
+	}
+	public Player(String firstName, String lastName, int rank, String adresse, int credit, LocalDate anniversary,
+			LocalDate dateRegister, int id, LocalDate lastGainForAnniversary) {
+		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, id, lastGainForAnniversary);
+	}
 	public Player(String firstName, String lastName, int rank, String adresse, int credit,
 			LocalDate anniversary, LocalDate dateRegister, String email, String password, LocalDate lastGainForAnniversary) {
 		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, email, password, lastGainForAnniversary);
@@ -57,7 +64,16 @@ public class Player extends User implements Serializable{
 	public void setLoan(ArrayList<Loan> loans) {
 		this.loans = loans;
 	}
-	
+	public ArrayList<Loan> getOnGoingLoan(){
+		ArrayList<Loan> loans = new ArrayList<Loan>();
+		for(Loan loan : this.getLoan() ) {
+			if(loan.getOnGoing() == 1 ) {
+				loans.add(loan);
+			}
+			
+		}
+		return loans;
+	}
 	
 	
 

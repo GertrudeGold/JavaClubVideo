@@ -89,9 +89,44 @@ public class UserDAO extends DAO<User> {
 
 	@Override
 	public User find(int id) {
-		// TODO Auto-generated method stub
+		User user = null;
+		
+		Connection conn=ProjetConnection.getInstance();
+		String query="select * from User where Uid="+id;
+		try {
+			ResultSet result=conn.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+			if(result.first()) {
+				String name=result.getString("LastName");
+				String firstName=result.getString("FirstName");
+				String adresse=result.getString("Adresse");
+				
+				int credit=result.getInt("Credits");
+				LocalDate anniversary = result.getDate("Anniversary").toLocalDate();
+				LocalDate dateRegistration = result.getDate("DateRegistration").toLocalDate();
+				int rank = result.getInt("Rank");
+				LocalDate LastGainForAnniversary = result.getDate("LastGainForAnniversary").toLocalDate();
+				if(rank == 0) {
+					
+					return user = new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration, id,LastGainForAnniversary);
+				}
+				if(rank == 1 ) {
+					return user = new Administrator(name,firstName,rank,adresse,credit,anniversary,dateRegistration,id);
+				}
+				
+			}
+				
+			
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+	
 		return null;
 	}
+	
 
 	@Override
 	public ArrayList<User> findAll() {
@@ -124,6 +159,49 @@ public class UserDAO extends DAO<User> {
 					ArrayList<Copy> copys = new ArrayList<Copy>();
 					ArrayList<Booking> bookings = new ArrayList<Booking>();
 					ArrayList<Loan> loans = new ArrayList<Loan>();
+					String query2="select * from Location where IdUser="+id;
+					try {
+						ResultSet result2=conn.createStatement(
+								ResultSet.TYPE_SCROLL_INSENSITIVE,
+								ResultSet.CONCUR_READ_ONLY).executeQuery(query2);
+						while(result2.next()) {
+							 Loan loan = new Loan();
+							 loan = loan.find(result2.getInt("Lid"));
+							 loans.add(loan);
+						}
+						}
+						catch(SQLException e) {
+							e.printStackTrace();
+						}
+					String query3="select * from Copy where IdUser="+id;
+					try {
+						ResultSet result3=conn.createStatement(
+								ResultSet.TYPE_SCROLL_INSENSITIVE,
+								ResultSet.CONCUR_READ_ONLY).executeQuery(query3);
+						while(result3.next()) {
+							Copy copy = new Copy();
+							copy.find(result3.getInt("UVid"));
+							copys.add(copy);
+						}
+						}
+						catch(SQLException e) {
+							e.printStackTrace();
+						}
+					String query4="select * from Reservation where IdUser="+id;
+					try {
+						ResultSet result4=conn.createStatement(
+								ResultSet.TYPE_SCROLL_INSENSITIVE,
+								ResultSet.CONCUR_READ_ONLY).executeQuery(query4);
+						while(result4.next()) {
+							Booking booking = new Booking();
+							booking.find(result4.getInt("Rid"));
+							bookings.add(booking);
+						}
+						}
+						catch(SQLException e) {
+							e.printStackTrace();
+						}
+					
 					return user = new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration,copys, bookings, loans, id,LastGainForAnniversary);
 				}
 				if(rank == 1 ) {

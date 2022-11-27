@@ -106,6 +106,13 @@ public class LoanWindow {
 		JSpinner numberOfWeek = new JSpinner();
 		numberOfWeek.setBounds(111, 115, 30, 20);
 		frame.getContentPane().add(numberOfWeek);
+		
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setBounds(10, 205, 283, 14);
+		frame.getContentPane().add(lblNewLabel_5);
+		if (connectPerson.getId() == copyChoose.getPlayer().getId()) {
+			lblNewLabel_5.setText("Cant take your own copy, just back");
+		}
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
@@ -118,15 +125,17 @@ public class LoanWindow {
 			validateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if((int)numberOfWeek.getValue() > 0 ) {
-					if(connectPerson.getCredit() >= (copyChoose.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue()))
+					if(connectPerson.getCredit() >= (copyChoose.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue())
+							&& connectPerson.getId() != copyChoose.getPlayer().getId())
 					{
-					int credit = connectPerson.getCredit();
-					credit-= copyChoose.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue();
-					connectPerson.setCredit(credit);
-					connectPerson.Update(connectPerson);
+					
+					connectPerson.calculateBalance(copyChoose.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue());
+					copyChoose.getPlayer().calculateBalance(-(copyChoose.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue()));
 					LocalDate now = LocalDate.now();  
 					LocalDate end = now.plusWeeks((int)numberOfWeek.getValue());
 					Loan loan = new Loan(now,end,1,connectPerson,copyChoose);
+					copyChoose.setIsLock(1);
+					copyChoose.update(copyChoose);
 					loan.Create(loan);
 					PlayerWindow playerWindow = new PlayerWindow(connectPerson);
 					JFrame playerFrame =  playerWindow.getFrame();

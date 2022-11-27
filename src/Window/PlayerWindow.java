@@ -73,9 +73,38 @@ public class PlayerWindow {
 		addCopyButton.setBounds(10, 51, 141, 23);
 		frame.getContentPane().add(addCopyButton);
 		
-		JButton Reservebutton = new JButton("Reserve a game");
+		JButton Reservebutton = new JButton("Loan a game");
 		Reservebutton.setBounds(10, 85, 141, 23);
 		frame.getContentPane().add(Reservebutton);
+		
+		JButton seeLoanButton = new JButton("See loan");
+		seeLoanButton.setBounds(10, 119, 141, 23);
+		frame.getContentPane().add(seeLoanButton);
+		
+		JButton bookingButton = new JButton("Book a game");
+		bookingButton.setBounds(10, 153, 141, 23);
+		frame.getContentPane().add(bookingButton);
+		bookingButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MakeABookingWindow makeABookingWindow = new MakeABookingWindow(connectPerson);
+				JFrame makeABookingFrame =  makeABookingWindow.getFrame();
+				makeABookingFrame.setVisible(true);
+				frame.dispose();
+
+				}
+				});
+		seeLoanButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				WatchLoanWindow watchLoanWindow = new WatchLoanWindow(connectPerson);
+				JFrame WatchLoanFrame =  watchLoanWindow.getFrame();
+				WatchLoanFrame.setVisible(true);
+				frame.dispose();
+
+				}
+				});
+		
+		
+		
 		Reservebutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				WatchListCopyWindow watchListCopyWindow = new WatchListCopyWindow(connectPerson);

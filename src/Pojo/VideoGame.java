@@ -41,6 +41,10 @@ public int getId() {
 public void setId(int id) {
 	this.id = id;
 }
+
+public VideoGame() {
+	super();
+}
 public VideoGame(int creditPrice, String gameName, ArrayList<Console> consoles, int id) {
 	super();
 	this.creditPrice = creditPrice;

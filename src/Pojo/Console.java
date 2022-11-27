@@ -49,6 +49,10 @@ public Console(String nameConsole, int id) {
 	this.nameConsole = nameConsole;
 	this.id = id;
 }
+
+public Console() {
+	super();
+}
 public static  ArrayList<Console> findAll() {
 	DAOFactory adf = new DAOFactory();
 	DAO<Console> consoleDao = adf.getConsoleDAO();

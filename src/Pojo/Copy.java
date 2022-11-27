@@ -17,7 +17,14 @@ public class Copy implements Serializable {
 	private Console console;
 	private Loan loan; 
 	private int id;
+	private int isLock;
 	
+	public int getIsLock() {
+		return isLock;
+	}
+	public void setIsLock(int isLock) {
+		this.isLock = isLock;
+	}
 	public Player getPlayer() {
 		return player;
 	}
@@ -64,6 +71,15 @@ public class Copy implements Serializable {
 		this.loan = loan;
 		this.id = id;
 	}
+	public Copy(Player player, VideoGame videoGame, Console console, int id, int isLock) {
+		super();
+		this.player = player;
+		this.videoGame = videoGame;
+		this.console = console;
+		this.loan = loan;
+		this.id = id;
+		this.isLock = isLock;
+	}
 	public Copy(Player player, VideoGame videoGame, Console console) {
 		super();
 		this.player = player;
@@ -78,10 +94,26 @@ public class Copy implements Serializable {
 		this.console = console;
 		this.id = id;
 	}
+	
+	public Copy() {
+		super();
+	}
 	public boolean Create(Copy copy) {
 		DAOFactory adf = new DAOFactory();
 		DAO<Copy> copyDao = adf.getCopyDAO();
 		return copyDao.create(copy);
+		
+	}
+	public boolean update(Copy copy) {
+		DAOFactory adf = new DAOFactory();
+		DAO<Copy> copyDao = adf.getCopyDAO();
+		return copyDao.update(copy);
+		
+	}
+	public Copy find(int id) {
+		DAOFactory adf = new DAOFactory();
+		DAO<Copy> copyDao = adf.getCopyDAO();
+		return copyDao.find(id);
 		
 	}
 	public static ArrayList<Copy> findall() {
