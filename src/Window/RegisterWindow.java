@@ -167,14 +167,18 @@ public class RegisterWindow {
 						adresse.getText().equals("") || passWord.getText().equals("")  
 						|| confirmPassword.getText().equals("")  || birthdayDate.getText().equals(""))
 				{
-					Error.setText("Tout doit être rempli");
+					Error.setText("all must be done ");
 				}
 				else if(validate(email.getText())==false) {
 					Error.setText("Email invalide");
 				}
 				else if(!passWord.getText().equals(confirmPassword.getText()) )
 				{
-					Error.setText("Mot de passe ne correspondent pas");	
+					Error.setText("password dont match");	
+				}
+				else if(User.checkIfEmailExist(email.getText()) )
+				{
+					Error.setText("Email already exist");	
 				}
 				else
 				{

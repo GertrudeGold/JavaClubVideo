@@ -19,6 +19,7 @@ import Pojo.Console;
 import Pojo.Copy;
 import Pojo.Player;
 import Pojo.VideoGame;
+import javax.swing.JTextPane;
 
 public class MakeABookingWindow{
 
@@ -83,6 +84,11 @@ public class MakeABookingWindow{
 		JComboBox<Console> ConsoleComboBox = new JComboBox<Console>();
 		frame.getContentPane().add(ConsoleComboBox);
 		
+		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
+		textPane.setBounds(430, 78, 131, 80);
+		frame.getContentPane().add(textPane);
+		
 		ArrayList<VideoGame> arrGames = VideoGame.findAll();
 		VideoGame[] games = new VideoGame[arrGames.size()];
 		games = arrGames.toArray(games);
@@ -130,10 +136,21 @@ public class MakeABookingWindow{
 		
 		
 				Validate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(selectedgame != null && selectedConsole != null) {
+				public void actionPerformed(ActionEvent e) {
+					int flag = 0;
+					for(Copy copy :Copy.findallUnlock()) {
+						
+						if(copy.getVideoGame().getGameName() == selectedgame.getGameName() && copy.getConsole().getNameConsole() == selectedConsole.getNameConsole())
+						{
+						flag=1;	
+						}
+					}
+					if(flag == 1) {
+						textPane.setText("The copy of this is already disponible");
+					}
+				if(selectedgame != null && selectedConsole != null && flag ==0) {
 				LocalDate now = LocalDate.now();  
-				Booking booking = new Booking(now,connectPerson, selectedgame,selectedConsole);
+				Booking booking = new Booking(now,connectPerson, selectedgame,selectedConsole,0);
 				booking.create(booking);
 				connectPerson.getBooking().add(booking);
 				//update connectPerson

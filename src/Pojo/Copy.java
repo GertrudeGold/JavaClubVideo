@@ -63,36 +63,23 @@ public class Copy implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Copy(Player player, VideoGame videoGame, Console console, Loan loan, int id) {
+	
+	public Copy(Player player, VideoGame videoGame, Console console, int isLock) {
 		super();
 		this.player = player;
 		this.videoGame = videoGame;
-		this.console = console;
-		this.loan = loan;
-		this.id = id;
-	}
-	public Copy(Player player, VideoGame videoGame, Console console, int id, int isLock) {
-		super();
-		this.player = player;
-		this.videoGame = videoGame;
-		this.console = console;
-		this.loan = loan;
-		this.id = id;
+		this.console = console;		
 		this.isLock = isLock;
 	}
-	public Copy(Player player, VideoGame videoGame, Console console) {
-		super();
-		this.player = player;
-		this.videoGame = videoGame;
-		this.console = console;
-	}
+
 	
-	public Copy(Player player, VideoGame videoGame, Console console, int id) {
+	public Copy(Player player, VideoGame videoGame, Console console, int id,int isLock) {
 		super();
 		this.player = player;
 		this.videoGame = videoGame;
 		this.console = console;
 		this.id = id;
+		this.isLock = isLock;
 	}
 	
 	public Copy() {
@@ -116,10 +103,31 @@ public class Copy implements Serializable {
 		return copyDao.find(id);
 		
 	}
-	public static ArrayList<Copy> findall() {
+	public static ArrayList<Copy> findallUnlock() {
+		ArrayList<Copy> copys = new ArrayList<Copy>();
 		DAOFactory adf = new DAOFactory();
 		DAO<Copy> copyDao = adf.getCopyDAO();
-		return copyDao.findAll();
+		for(Copy copy :copyDao.findAll() )
+		{
+			if(copy.isLock == 0) {
+				copys.add(copy) ;
+			}
+		}
+		return copys;
+		
+	}
+	public  Copy findACopyForAReservation(Booking booking) {
+	
+		DAOFactory adf = new DAOFactory();
+		DAO<Copy> copyDao = adf.getCopyDAO();
+		
+		for(Copy copy :copyDao.findAll() )
+		{
+			if(copy.getIsLock() == booking.getId() ) {
+				return copy;
+			}
+		}
+		return null ;
 		
 	}
 

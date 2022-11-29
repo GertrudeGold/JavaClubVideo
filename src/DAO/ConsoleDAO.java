@@ -59,11 +59,7 @@ public class ConsoleDAO extends DAO<Console> {
 		return null;
 	}
 
-	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public ArrayList<Console> findAll() {

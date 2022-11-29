@@ -58,11 +58,7 @@ public class LoanDAO extends DAO<Loan> {
 		return false;
 	}
 
-	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public boolean update(Loan obj) {

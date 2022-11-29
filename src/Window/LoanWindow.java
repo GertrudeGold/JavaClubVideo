@@ -137,11 +137,13 @@ public class LoanWindow {
 					copyChoose.setIsLock(1);
 					copyChoose.update(copyChoose);
 					loan.Create(loan);
+					connectPerson.getLoan().add(loan);
 					PlayerWindow playerWindow = new PlayerWindow(connectPerson);
 					JFrame playerFrame =  playerWindow.getFrame();
 					playerFrame.setVisible(true);
 					frame.dispose();
 					}
+					else {lblNewLabel_5.setText("Not enought credit");}
 					}
 				}
 			});

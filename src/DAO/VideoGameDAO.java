@@ -26,11 +26,7 @@ public class VideoGameDAO extends DAO<VideoGame> {
 		return false;
 	}
 
-	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public boolean update(VideoGame obj) {

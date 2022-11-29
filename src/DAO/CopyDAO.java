@@ -30,7 +30,7 @@ public class CopyDAO extends DAO<Copy> {
 	        pstmt.setInt(1,obj.getPlayer().getId());
 	        pstmt.setInt(2, obj.getVideoGame().getId());
 	        pstmt.setInt(3,obj.getConsole().getId());
-	        pstmt.setInt(4,0);
+	        pstmt.setInt(4,obj.getIsLock());
 	        
 
 
@@ -57,11 +57,7 @@ public class CopyDAO extends DAO<Copy> {
 		return false;
 	}
 
-	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public boolean update(Copy obj) {
@@ -144,8 +140,7 @@ public class CopyDAO extends DAO<Copy> {
 		String query="select * from (("
 				+ "(Copy INNER JOIN VideoGame on Copy.IdVideoGame = VideoGame.Vid)"
 				+ "INNER JOIN Console on Console.Cid = Copy.IdConsole)"
-				+ "Inner JOIN User on User.Uid = Copy.IdUser)"
-				+ "where Copy.IsLock="+0;
+				+ "Inner JOIN User on User.Uid = Copy.IdUser)";
 		try {
 			ResultSet result=conn.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -173,9 +168,9 @@ public class CopyDAO extends DAO<Copy> {
 				Player player = new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration,idPlayer);
 				Console console = new Console(NameConsole,idConsole);
 				VideoGame videoGame =new VideoGame(creditPrice,gameName,idVideoGame);
+				int isLock = result.getInt("IsLock");
 				
-				
-				copys.add(new Copy(player,videoGame,console,idCopy,0));
+				copys.add(new Copy(player,videoGame,console,idCopy,isLock));
 				
 			}
 				

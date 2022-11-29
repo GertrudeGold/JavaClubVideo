@@ -40,7 +40,19 @@ public class Player extends User implements Serializable{
 		super(firstName, lastName, rank, adresse, credit, anniversary, dateRegister, email, password, lastGainForAnniversary);
 		// TODO Auto-generated constructor stub
 	}
+	
 
+	public Player(String firstName, String lastName, int rank, String adresse, int credit,
+			LocalDate anniversary, LocalDate dateRegister, String email,int id, LocalDate lastGainForAnniversary) {
+		super(firstName, lastName, rank, adresse, credit, id, anniversary, dateRegister, email, lastGainForAnniversary);
+		// TODO Auto-generated constructor stub
+	}
+	public Player(String firstName, String lastName, int rank, String adresse, int credit, int id,
+			LocalDate anniversary, LocalDate dateRegister, String email, LocalDate lastGainForAnniversary) {
+		super(firstName, lastName, rank, adresse, credit, id, anniversary, dateRegister, email, lastGainForAnniversary);
+		// TODO Auto-generated constructor stub
+	}
+	
 	public ArrayList<Copy> getCopy() {
 		return copys;
 	}

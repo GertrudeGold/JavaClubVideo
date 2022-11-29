@@ -9,26 +9,25 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTable;
-import javax.swing.JButton;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import Pojo.Booking;
 import Pojo.Copy;
 import Pojo.Player;
 
-import javax.swing.JTextArea;
-
-public class WatchListCopyWindow {
+public class WatchBookingWindow {
 
 	private JFrame frame;
 	private Player connectPerson;
 	private JTable table;
-	private Copy copySelected;
+	private Booking bookingSelected;
 	public JFrame getFrame() {
 		return frame;
 	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -36,7 +35,7 @@ public class WatchListCopyWindow {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WatchListCopyWindow window = new WatchListCopyWindow();
+					WatchBookingWindow window = new WatchBookingWindow();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,10 +47,10 @@ public class WatchListCopyWindow {
 	/**
 	 * Create the application.
 	 */
-	public WatchListCopyWindow() {
+	public WatchBookingWindow() {
 		initialize();
 	}
-	public WatchListCopyWindow(Player connectPerson) {
+	public WatchBookingWindow(Player connectPerson) {
 		this.connectPerson = connectPerson;
 		initialize();
 	}
@@ -61,48 +60,33 @@ public class WatchListCopyWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 732, 573);
+		frame.setBounds(100, 100, 864, 496);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
 		JButton Backbutton = new JButton("Back");
-		Backbutton.setBounds(576, 500, 130, 23);
+		Backbutton.setBounds(708, 423, 130, 23);
 		frame.getContentPane().add(Backbutton);
-		
-		JButton Reservebutton = new JButton("Reservation");
-		Reservebutton.setBounds(576, 466, 130, 23);
-		frame.getContentPane().add(Reservebutton);
-		Reservebutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MakeABookingWindow makeABookingWindow = new MakeABookingWindow(connectPerson);
-				JFrame makeABookingFrame =  makeABookingWindow.getFrame();
-				makeABookingFrame.setVisible(true);
-				frame.dispose();
-
-				}
-				});
-		JTextArea txtrIfYourGame = new JTextArea();
-		txtrIfYourGame.setEditable(false);
-		txtrIfYourGame.setLineWrap(true);
-		txtrIfYourGame.setText("If your game is not on the list, pls make a reservation");
-		txtrIfYourGame.setBounds(548, 381, 168, 74);
-		frame.getContentPane().add(txtrIfYourGame);
-		
-		ArrayList<Copy> copyToShow = Copy.findallUnlock();
-		String[] colums={"Game","Owner","Credit","Console","Id"};
-		Object data[][]=new Object[copyToShow.size()+1][5];
+		ArrayList<Booking> BookingToShow = Booking.findAllOfAnUser(connectPerson);
+		String[] colums={"Date","Game","Console","Ready/not ready","Id"};
+		Object data[][]=new Object[BookingToShow.size()+1][5];
 		data[0][0]=colums[0];
 		data[0][1]=colums[1];
 		data[0][2]=colums[2];
 		data[0][3]=colums[3];
 		data[0][4]=colums[4];
 		int cpt=1;
-		for (Copy copy : copyToShow) {
-			data[cpt][0]=copy.getVideoGame().getGameName();
-			data[cpt][1]=copy.getPlayer().getFirstName();
-			data[cpt][2]=copy.getVideoGame().getCreditPrice();
-			data[cpt][3]=copy.getConsole().getNameConsole();
-			data[cpt][4]=copy.getId();
+		for (Booking booking : BookingToShow) {
+			data[cpt][0]=booking.getDateReservation();
+			data[cpt][1]=booking.getVideoGame().getGameName();
+			data[cpt][2]=booking.getConsole().getNameConsole();
+			if(booking.getIsReady()==0) {
+				data[cpt][3]="Not ready";
+			}
+			else
+			{
+				data[cpt][3]="Ready";
+			}
+			data[cpt][4]=booking.getId();
 			cpt++;
 		}
 		table = new JTable();
@@ -112,7 +96,7 @@ public class WatchListCopyWindow {
 
 
 
-		table.setBounds(10, 11, 506, 491);
+		table.setBounds(0, 0, 581, 446);
 		table.setFont(new Font("Courier New", Font.PLAIN, 13));
 		table.setRowHeight(20);
 		table.setBackground(Color.WHITE);
@@ -133,18 +117,18 @@ public class WatchListCopyWindow {
 				try {
 				if (e.getClickCount() == 1) {
 				
-					for(Copy copy : copyToShow) {
+					for(Booking booking : BookingToShow) {
 				
-						if(copy.getId() == (int)table.getModel().getValueAt(table.rowAtPoint(e.getPoint()),4))
+						if(booking.getId() == (int)table.getModel().getValueAt(table.rowAtPoint(e.getPoint()),4))
 						{
-							copySelected = copy;
+							bookingSelected = booking;
 						}
 					}
 					
 					
-					LoanWindow loanWindow = new LoanWindow(connectPerson,copySelected);
-					JFrame loanFrame =  loanWindow.getFrame();
-					loanFrame.setVisible(true);
+					ManageBookingWindow manageBookingWindow = new ManageBookingWindow(connectPerson,bookingSelected);
+					JFrame manageBookingFrame =  manageBookingWindow.getFrame();
+					manageBookingFrame.setVisible(true);
 					frame.dispose();
 					}
 					

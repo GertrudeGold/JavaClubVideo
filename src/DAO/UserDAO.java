@@ -62,11 +62,7 @@ public class UserDAO extends DAO<User> {
 		return false;
 	}
 
-	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public boolean update(User obj) {
@@ -130,8 +126,44 @@ public class UserDAO extends DAO<User> {
 
 	@Override
 	public ArrayList<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<User> users = new ArrayList<User>();
+		
+		Connection conn=ProjetConnection.getInstance();
+		String query="select * from User";
+		try {
+			ResultSet result=conn.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery(query);
+			while(result.next()) {
+				String name=result.getString("LastName");
+				String firstName=result.getString("FirstName");
+				String adresse=result.getString("Adresse");
+				String email=result.getString("Email");
+				int id = result.getInt("Uid");
+				int credit=result.getInt("Credits");
+				LocalDate anniversary = result.getDate("Anniversary").toLocalDate();
+				LocalDate dateRegistration = result.getDate("DateRegistration").toLocalDate();
+				int rank = result.getInt("Rank");
+				LocalDate LastGainForAnniversary = result.getDate("LastGainForAnniversary").toLocalDate();
+				if(rank == 0) {
+					Player player= new Player (name,firstName,rank,adresse,credit,anniversary,dateRegistration,email, id,LastGainForAnniversary);
+					users.add(player);
+				} 
+				if(rank == 1 ) {
+					Administrator administrator = new Administrator (name,firstName,rank,adresse,credit,anniversary,dateRegistration,email, id,LastGainForAnniversary);
+					users.add(administrator);
+				}
+				
+			}
+				
+			
+			
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+	
+		return users;
 	}
 	
 	

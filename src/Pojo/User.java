@@ -101,6 +101,21 @@ public User(String firstName, String lastName, int rank,String adresse, int cred
 	this.id = id;
 	this.lastGainForAnniversary = lastGainForAnniversary;
 }
+
+public User(String firstName, String lastName, int rank, String adresse, int credit, int id, LocalDate anniversary,
+		LocalDate dateRegister, String email, LocalDate lastGainForAnniversary) {
+	super();
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.rank = rank;
+	this.adresse = adresse;
+	this.credit = credit;
+	this.id = id;
+	this.anniversary = anniversary;
+	this.dateRegister = dateRegister;
+	this.email = email;
+	this.lastGainForAnniversary = lastGainForAnniversary;
+}
 public User(String firstName, String lastName, int rank, String adresse, int credit, LocalDate anniversary,
 		LocalDate dateRegister, String email, String password,LocalDate lastGainForAnniversary) {
 	super();
@@ -144,5 +159,18 @@ public User find(int id) {
 	DAOFactory adf = new DAOFactory();
 	DAO<User> userDao = adf.getUserDAO();
 	return userDao.find(id);
+}
+public static boolean checkIfEmailExist(String email) {
+	boolean success=false;
+	DAOFactory adf = new DAOFactory();
+	DAO<User> userDao = adf.getUserDAO(); 
+			
+	for(User user :userDao.findAll() )
+	{
+		if(user.getEmail().equals(email) ) {
+			success= true;
+		}
+	}		
+	return success;
 }
 }

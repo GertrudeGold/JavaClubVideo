@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 
 import Other.ComboBoxModelConsole;
 import Other.ComboBoxModelVideoGame;
+import Pojo.Booking;
 import Pojo.Console;
 import Pojo.Copy;
 import Pojo.Player;
@@ -130,9 +131,33 @@ public class AddCopyWindow {
 				Validate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(selectedgame != null && selectedConsole != null) {
-				Copy copy = new Copy(connectPerson, selectedgame,selectedConsole);
-				copy.Create(copy);
+					
+					ArrayList<Booking> bookingsForThisCopy = new ArrayList<Booking>();
+				for(Booking booking : Booking.findAllNotReeady()) {
+					if(booking.getVideoGame().getGameName() == selectedgame.getGameName() && booking.getConsole().getNameConsole() == selectedConsole.getNameConsole()) {
+						bookingsForThisCopy.add(booking);
+					}
+				}
+				Booking goodBooking = new Booking();
+				Copy copy;
+				if (bookingsForThisCopy.size()>1 ) {
+					
+					goodBooking = goodBooking.findPriorityBooking(bookingsForThisCopy);
+					goodBooking.setIsReady(1);
+					goodBooking.update(goodBooking);
+					copy = new Copy(connectPerson, selectedgame,selectedConsole,goodBooking.getId());
+					connectPerson.getCopy().add(copy);
+				}else if (bookingsForThisCopy.size()==1) {
+					goodBooking = bookingsForThisCopy.get(0);
+					goodBooking.setIsReady(1);
+					goodBooking.update(goodBooking);
+					copy = new Copy(connectPerson, selectedgame,selectedConsole,goodBooking.getId());
+				}
+				else {
+					 copy = new Copy(connectPerson, selectedgame,selectedConsole,0);
+				}
 				connectPerson.getCopy().add(copy);
+				copy.Create(copy);
 				//update connectPerson
 					PlayerWindow playerWindow = new PlayerWindow(connectPerson);
 					JFrame playerFrame =  playerWindow.getFrame();

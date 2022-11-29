@@ -65,63 +65,105 @@ public class PlayerWindow {
 			connectPerson.Update(connectPerson);
 			}
 		}
+		//for credit <0 
+		if(connectPerson.getCredit() >0) {
+			JButton addCopyButton = new JButton("Add a copy");
+			addCopyButton.setBounds(10, 51, 141, 23);
+			frame.getContentPane().add(addCopyButton);
+			
+			JButton Reservebutton = new JButton("Loan a game");
+			Reservebutton.setBounds(10, 85, 141, 23);
+			frame.getContentPane().add(Reservebutton);
+			
+			JButton seeLoanButton = new JButton("See loan");
+			seeLoanButton.setBounds(10, 119, 141, 23);
+			frame.getContentPane().add(seeLoanButton);
+			
+			JButton bookingButton = new JButton("Reservation");
+			bookingButton.setBounds(10, 153, 141, 23);
+			frame.getContentPane().add(bookingButton);
+			JButton seeReservationButton = new JButton("See reservation");
+			seeReservationButton.setBounds(10, 187, 141, 23);
+			frame.getContentPane().add(seeReservationButton);
+			seeReservationButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					WatchBookingWindow watchBookingWindow = new WatchBookingWindow(connectPerson);
+					JFrame watchBookingFrame =  watchBookingWindow.getFrame();
+					watchBookingFrame.setVisible(true);
+					frame.dispose();
+
+					}
+					});
+			
+			
+			
+			bookingButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					MakeABookingWindow makeABookingWindow = new MakeABookingWindow(connectPerson);
+					JFrame makeABookingFrame =  makeABookingWindow.getFrame();
+					makeABookingFrame.setVisible(true);
+					frame.dispose();
+
+					}
+					});
+			seeLoanButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					WatchLoanWindow watchLoanWindow = new WatchLoanWindow(connectPerson);
+					JFrame WatchLoanFrame =  watchLoanWindow.getFrame();
+					WatchLoanFrame.setVisible(true);
+					frame.dispose();
+
+					}
+					});
+			
+			
+			
+			Reservebutton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					WatchListCopyWindow watchListCopyWindow = new WatchListCopyWindow(connectPerson);
+					JFrame watchListCopyFrame =  watchListCopyWindow.getFrame();
+					watchListCopyFrame.setVisible(true);
+					frame.dispose();
+
+					}
+					});
+			addCopyButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+						AddCopyWindow addCopyWindow = new AddCopyWindow(connectPerson);
+						JFrame addCopyframe =  addCopyWindow.getFrame();
+						addCopyframe.setVisible(true);
+						frame.dispose();
+
+					}
+					});
+		}
 		JLabel lblNewLabel = new JLabel("Hello player : "+connectPerson.getFirstName());
 		lblNewLabel.setBounds(10, 11, 243, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JButton addCopyButton = new JButton("Add a copy");
-		addCopyButton.setBounds(10, 51, 141, 23);
-		frame.getContentPane().add(addCopyButton);
 		
-		JButton Reservebutton = new JButton("Loan a game");
-		Reservebutton.setBounds(10, 85, 141, 23);
-		frame.getContentPane().add(Reservebutton);
 		
-		JButton seeLoanButton = new JButton("See loan");
-		seeLoanButton.setBounds(10, 119, 141, 23);
-		frame.getContentPane().add(seeLoanButton);
+		JLabel lblNewLabel_1 = new JLabel("You have : ");
+		lblNewLabel_1.setBounds(175, 11, 94, 14);
+		frame.getContentPane().add(lblNewLabel_1);
 		
-		JButton bookingButton = new JButton("Book a game");
-		bookingButton.setBounds(10, 153, 141, 23);
-		frame.getContentPane().add(bookingButton);
-		bookingButton.addActionListener(new ActionListener() {
+		JLabel credit = new JLabel( connectPerson.getCredit() +" credits");
+		credit.setBounds(247, 11, 81, 14);
+		frame.getContentPane().add(credit);
+		
+		JButton decoButton = new JButton("Sign out");
+		decoButton.setBounds(632, 366, 89, 23);
+		frame.getContentPane().add(decoButton);
+		decoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MakeABookingWindow makeABookingWindow = new MakeABookingWindow(connectPerson);
-				JFrame makeABookingFrame =  makeABookingWindow.getFrame();
-				makeABookingFrame.setVisible(true);
-				frame.dispose();
-
-				}
-				});
-		seeLoanButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				WatchLoanWindow watchLoanWindow = new WatchLoanWindow(connectPerson);
-				JFrame WatchLoanFrame =  watchLoanWindow.getFrame();
-				WatchLoanFrame.setVisible(true);
+				LoginWindow loginWindow = new LoginWindow();
+				JFrame LoginFrame =  loginWindow.getFrame();
+				LoginFrame.setVisible(true);
 				frame.dispose();
 
 				}
 				});
 		
 		
-		
-		Reservebutton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				WatchListCopyWindow watchListCopyWindow = new WatchListCopyWindow(connectPerson);
-				JFrame watchListCopyFrame =  watchListCopyWindow.getFrame();
-				watchListCopyFrame.setVisible(true);
-				frame.dispose();
-
-				}
-				});
-		addCopyButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					AddCopyWindow addCopyWindow = new AddCopyWindow(connectPerson);
-					JFrame addCopyframe =  addCopyWindow.getFrame();
-					addCopyframe.setVisible(true);
-					frame.dispose();
-
-				}
-				});
 	}
 }
