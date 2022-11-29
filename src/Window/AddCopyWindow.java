@@ -81,14 +81,16 @@ public class AddCopyWindow {
 		frame.getContentPane().add(Validate);
 		JComboBox<Console> ConsoleComboBox = new JComboBox<Console>();
 		frame.getContentPane().add(ConsoleComboBox);
-		
+		//show combobox with videogame
 		ArrayList<VideoGame> arrGames = VideoGame.findAll();
 		VideoGame[] games = new VideoGame[arrGames.size()];
 		games = arrGames.toArray(games);
+		//show combobox with console
 		ComboBoxModelVideoGame comboBoxModelVideoGame = new ComboBoxModelVideoGame(games);
 		JComboBox<VideoGame> gameComboBox = new JComboBox<VideoGame>(comboBoxModelVideoGame);
 		gameComboBox.setBounds(131, 11, 224, 22);
 		frame.getContentPane().add(gameComboBox);
+		//event for selected item in combobox
 		gameComboBox.addActionListener(new ActionListener() {
 			 @Override
 			    public void actionPerformed(ActionEvent event) {

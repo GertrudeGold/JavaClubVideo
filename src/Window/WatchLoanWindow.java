@@ -82,7 +82,7 @@ public class WatchLoanWindow {
 		frame.getContentPane().add(txtrIfYourGame);
 		ArrayList<Loan> LoanToShow = connectPerson.getOnGoingLoan();
 		
-		
+		//create a table with informations for select it
 		String[] colums={"DateStart","DateEnd","Owner","Game","Id"};
 		Object data[][]=new Object[LoanToShow.size()+1][5];
 		data[0][0]=colums[0];

@@ -56,6 +56,7 @@ public class EditCreditWindow {
 		frame.setBounds(100, 100, 787, 579);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		//create a table with informations for edit
 			ArrayList<VideoGame> videoGames= VideoGame.findAll();
 		int size= videoGames.size();
 		String[] colums={"Name","Credit cost","Id"};

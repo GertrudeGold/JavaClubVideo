@@ -87,7 +87,7 @@ public class WatchListCopyWindow {
 		txtrIfYourGame.setText("If your game is not on the list, pls make a reservation");
 		txtrIfYourGame.setBounds(548, 381, 168, 74);
 		frame.getContentPane().add(txtrIfYourGame);
-		
+		//create a table with informations for select it
 		ArrayList<Copy> copyToShow = Copy.findallUnlock();
 		String[] colums={"Game","Owner","Credit","Console","Id"};
 		Object data[][]=new Object[copyToShow.size()+1][5];

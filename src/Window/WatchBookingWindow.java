@@ -66,6 +66,7 @@ public class WatchBookingWindow {
 		JButton Backbutton = new JButton("Back");
 		Backbutton.setBounds(708, 423, 130, 23);
 		frame.getContentPane().add(Backbutton);
+		//create a table with informations for select it
 		ArrayList<Booking> BookingToShow = Booking.findAllOfAnUser(connectPerson);
 		String[] colums={"Date","Game","Console","Ready/not ready","Id"};
 		Object data[][]=new Object[BookingToShow.size()+1][5];
