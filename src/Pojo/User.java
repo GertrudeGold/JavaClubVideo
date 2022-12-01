@@ -139,6 +139,17 @@ public void calculateBalance(int ammount) {
 	this.setCredit(diff);
 	this.Update(this);
 }
+public void addBirthdayBonus() {
+			LocalDate now = LocalDate.now();  
+			if(this.getAnniversary().getDayOfMonth() == now.getDayOfMonth() && this.getAnniversary().getMonth() == now.getMonth())
+			{
+			    if(this.getLastGainForAnniversary().getYear() != now.getYear()){
+			    	this.setCredit(this.getCredit()+2);
+			    	this.setLastGainForAnniversary(now);
+			    	this.Update(this);
+				}
+			}
+}
 
 public static  User login(String email, String password) {
 	DAOFactory adf = new DAOFactory();

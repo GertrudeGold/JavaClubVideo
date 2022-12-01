@@ -56,16 +56,7 @@ public class PlayerWindow {
 		frame.setBounds(100, 100, 747, 439);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		//for anniversary
-		LocalDate now = LocalDate.now();  
-		if(connectPerson.getAnniversary().getDayOfMonth() == now.getDayOfMonth() && connectPerson.getAnniversary().getMonth() == now.getMonth())
-		{
-		    if(connectPerson.getLastGainForAnniversary().getYear() != now.getYear()){
-			connectPerson.setCredit(connectPerson.getCredit()+2);
-			connectPerson.setLastGainForAnniversary(now);
-			connectPerson.Update(connectPerson);
-			}
-		}
+		connectPerson.addBirthdayBonus();
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setBounds(442, 50, 181, 132);
