@@ -126,9 +126,9 @@ public class ManageBookingWindow {
 					if((int)numberOfWeek.getValue() > 0 ) {
 						copyOfBooking= new Copy();
 						copyOfBooking = copyOfBooking.findACopyForAReservation(bookingChoose);
-						if(connectPerson.getCredit() >= (copyOfBooking.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue())
-								&& connectPerson.getId() != copyOfBooking.getPlayer().getId())
+						if(connectPerson.getCredit() >= (copyOfBooking.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue()))
 						{
+							if( connectPerson.getId() != copyOfBooking.getPlayer().getId()) {
 						
 						connectPerson.calculateBalance(copyOfBooking.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue());
 						copyOfBooking.getPlayer().calculateBalance(-(copyOfBooking.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue()));
@@ -144,6 +144,7 @@ public class ManageBookingWindow {
 						JFrame playerFrame =  playerWindow.getFrame();
 						playerFrame.setVisible(true);
 						frame.dispose();
+							}
 						}
 						else {lblNewLabel_5.setText("Not enought credit");}
 						}

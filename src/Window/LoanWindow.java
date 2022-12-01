@@ -126,9 +126,9 @@ public class LoanWindow {
 			public void actionPerformed(ActionEvent e) {
 				if((int)numberOfWeek.getValue() > 0 ) {
 					if(connectPerson.getCredit() >= (copyChoose.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue())
-							&& connectPerson.getId() != copyChoose.getPlayer().getId())
+							)
 					{
-					
+						if( connectPerson.getId() != copyChoose.getPlayer().getId()) {
 					connectPerson.calculateBalance(copyChoose.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue());
 					copyChoose.getPlayer().calculateBalance(-(copyChoose.getVideoGame().getCreditPrice()*(int)numberOfWeek.getValue()));
 					LocalDate now = LocalDate.now();  
@@ -142,6 +142,7 @@ public class LoanWindow {
 					JFrame playerFrame =  playerWindow.getFrame();
 					playerFrame.setVisible(true);
 					frame.dispose();
+						}
 					}
 					else {lblNewLabel_5.setText("Not enought credit");}
 					}

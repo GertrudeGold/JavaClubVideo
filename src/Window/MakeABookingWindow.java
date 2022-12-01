@@ -146,7 +146,7 @@ public class MakeABookingWindow{
 						}
 					}
 					if(flag == 1) {
-						textPane.setText("The copy of this is already disponible");
+						textPane.setText("The copy of this is already available");
 					}
 				if(selectedgame != null && selectedConsole != null && flag ==0) {
 				LocalDate now = LocalDate.now();  

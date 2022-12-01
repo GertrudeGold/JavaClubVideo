@@ -108,7 +108,7 @@ public class GiveBackCopyWindow {
 		
 		BackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					WatchLoanWindow watchLoanWindow = new WatchLoanWindow();
+					WatchLoanWindow watchLoanWindow = new WatchLoanWindow(connectPerson);
 					JFrame watchLoanFrame =  watchLoanWindow.getFrame();
 					watchLoanFrame.setVisible(true);
 					frame.dispose();
